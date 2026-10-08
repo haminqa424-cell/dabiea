@@ -3,6 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-699953330"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-699953330');
+</script>
 <title>الاستعلام عن المخالفات المرورية</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,6 +107,11 @@ footer{background:var(--footer);color:var(--footer-fg);padding-inline:16px;paddi
 .ft a{color:var(--footer-fg);text-decoration:none}
 .ft a:hover{color:var(--mint)}
 .copy{max-width:1100px;margin:28px auto 0;padding-top:16px;border-top:1px solid #222826;font-size:13px;color:#8A9692;text-align:center}
+/* Legal links */
+.legal-links{display:flex;flex-direction:column;gap:10px}
+.legal-links a{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:12px;color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;transition:border-color .2s,background .2s}
+.legal-links a:hover{border-color:var(--mint);background:var(--mint-soft);color:var(--mint-dark)}
+.legal-links a::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--mint)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -152,6 +165,16 @@ footer{background:var(--footer);color:var(--footer-fg);padding-inline:16px;paddi
     <p class="sec-p" data-t="faqP">إجابات عن أكثر الأسئلة تكراراً حول المخالفات المرورية.</p>
     <div class="faq" id="faqList"></div>
   </section>
+
+  <section id="legal">
+    <h2 class="sec-h" data-t="legalH">الصفحات القانونية</h2>
+    <div class="legal-links">
+      <a href="privacy.html" data-t="lp1">سياسة الخصوصية</a>
+      <a href="terms.html" data-t="lp2">الشروط والأحكام</a>
+      <a href="cookies.html" data-t="lp3">سياسة ملفات تعريف الارتباط</a>
+      <a href="disclaimer.html" data-t="lp4">إخلاء المسؤولية</a>
+    </div>
+  </section>
 </main>
 
 <footer id="contact">
@@ -171,6 +194,7 @@ ar:{title:"الاستعلام عن المخالفات المرورية",close:"�
 s1t:"استعلم عن مخالفاتك في ثوانٍ",s1s:"خدمة إلكترونية متاحة على مدار الساعة",s2t:"ادفع مخالفاتك بسهولة",s2s:"تابع حالة السداد من مكان واحد",s3t:"قيادة آمنة، طرق أكثر أماناً",s3s:"التزم بقواعد السير وتجنّب المخالفات",
 b1:"الاستعلام برقم اللوحة",b1s:"أدخل رقم لوحة المركبة ورمزها",b2:"الاستعلام بالملف المروري",b2s:"برقم الملف أو رقم الهوية",b3:"الاستعلام برقم المخالفة",b3s:"أدخل الرقم المدوّن على إشعار المخالفة",
 faqH:"الأسئلة الشائعة",faqP:"إجابات عن أكثر الأسئلة تكراراً حول المخالفات المرورية.",
+legalH:"الصفحات القانونية",lp1:"سياسة الخصوصية",lp2:"الشروط والأحكام",lp3:"سياسة ملفات تعريف الارتباط",lp4:"إخلاء المسؤولية",
 f1:"عن الخدمة",f1p:"بوابة إلكترونية للاستعلام عن المخالفات المرورية ومتابعة حالتها بسهولة.",f2:"روابط سريعة",f3:"تواصل معنا",f4:"بيانات الشركة",f4c:"أوكرانيا",f4d:"الدومين",f4e:"مملوك للشركة",f3a:"الهاتف:",f3b:"البريد:",f3c:"ساعات العمل: ٨ ص – ٨ م",copy:'© 2026 TOV "КОНСТРУКТИВ ВТВ" — جميع الحقوق محفوظة',
 search:"استعلام",cancel:"إلغاء",lang:"English",
 plate:"رقم اللوحة",code:"رمز اللوحة",source:"جهة الإصدار",fileNo:"رقم الملف المروري أو الهوية",ticketNo:"رقم المخالفة",
@@ -180,6 +204,7 @@ en:{title:"Traffic Violations Inquiry",close:"Close ✕",m1:"Home",m2:"Inquiry s
 s1t:"Check your fines in seconds",s1s:"An online service available 24/7",s2t:"Pay your fines with ease",s2s:"Track payment status in one place",s3t:"Drive safe, safer roads",s3s:"Follow the rules and avoid violations",
 b1:"Inquiry by plate number",b1s:"Enter the vehicle plate number and code",b2:"Inquiry by traffic file",b2s:"By file number or ID number",b3:"Inquiry by fine number",b3s:"Enter the number printed on the fine notice",
 faqH:"Frequently asked questions",faqP:"Answers to the most common questions about traffic violations.",
+legalH:"Legal Pages",lp1:"Privacy Policy",lp2:"Terms & Conditions",lp3:"Cookie Policy",lp4:"Disclaimer",
 f1:"About the service",f1p:"An online portal to look up traffic violations and follow their status.",f2:"Quick links",f3:"Contact us",f4:"Company details",f4c:"Ukraine",f4d:"Domain",f4e:"owned by the company",f3a:"Phone:",f3b:"Email:",f3c:"Hours: 8 AM – 8 PM",copy:'© 2026 TOV "КОНСТРУКТИВ ВТВ" — All rights reserved',
 search:"Search",cancel:"Cancel",lang:"العربية",
 plate:"Plate number",code:"Plate code",source:"Issuing emirate",fileNo:"Traffic file or ID number",ticketNo:"Fine number",
