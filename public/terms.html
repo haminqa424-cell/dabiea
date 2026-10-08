@@ -1,0 +1,124 @@
+<title>الشروط والأحكام</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: white app-bar, centered legal article column, black footer */
+:root{
+  --mint:#2FB38A; --mint-dark:#1F8F6C; --mint-soft:#E6F6F0;
+  --ink:#16201C; --muted:#5B6B65; --line:#E3EBE8;
+  --bg:#F6F9F8; --card:#FFFFFF; --footer:#0B0D0C; --footer-fg:#C9D3CF;
+  --display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --body:"IBM Plex Sans Arabic","Readex Pro",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.85}
+button{font:inherit;cursor:pointer}
+a{color:var(--mint-dark)}
+:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
+
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(22,32,28,.05)}
+.hdr-in{max-width:1100px;margin:0 auto;padding:10px 16px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px}
+.home{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--mint-dark);background:var(--mint-soft);padding:8px 14px;border-radius:999px;font-weight:600;font-size:14px}
+.home svg{width:16px;height:16px}
+[dir="ltr"] .home svg{transform:scaleX(-1)}
+.hdr h1{margin:0;text-align:center;font-family:var(--display);font-weight:600;font-size:clamp(15px,3.6vw,20px);color:var(--ink);text-wrap:balance}
+.lang{background:var(--mint);color:#fff;border:0;border-radius:999px;padding:8px 16px;font-weight:600;font-size:14px;min-width:84px}
+.lang:hover{background:var(--mint-dark)}
+
+main{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:28px 48px}
+.hero{background:linear-gradient(135deg,var(--mint) 0%,var(--mint-dark) 100%);color:#fff;border-radius:18px;padding:26px 24px;margin-bottom:26px;box-shadow:0 8px 22px rgba(31,143,108,.25)}
+.hero h2{margin:0 0 6px;font-family:var(--display);font-size:clamp(20px,5vw,28px)}
+.hero p{margin:0;opacity:.92;font-size:14px}
+.updated{display:inline-block;margin-top:14px;background:rgba(255,255,255,.18);padding:5px 12px;border-radius:999px;font-size:13px}
+
+article{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:8px 22px 22px;display:flex;flex-direction:column}
+.sec{padding:20px 0;border-bottom:1px solid var(--line)}
+.sec:last-child{border-bottom:0}
+.sec h3{display:flex;align-items:center;gap:12px;margin:0 0 10px;font-family:var(--display);font-size:18px}
+.sec h3 .n{flex:none;width:30px;height:30px;border-radius:9px;background:var(--mint-soft);color:var(--mint-dark);display:grid;place-items:center;font-size:14px;font-variant-numeric:tabular-nums}
+.sec p{margin:0 0 10px;color:var(--muted)}
+.sec p:last-child{margin-bottom:0}
+.sec ul{margin:0;padding-inline-start:22px;color:var(--muted);display:flex;flex-direction:column;gap:6px}
+
+footer{background:var(--footer);color:var(--footer-fg);padding-inline:16px;padding-block:36px 24px;margin-top:8px}
+.ft{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+.ft h4{margin:0 0 10px;color:#fff;font-family:var(--display);font-size:16px}
+.ft ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.ft a{color:var(--footer-fg);text-decoration:none}
+.ft a:hover{color:var(--mint)}
+.copy{max-width:1100px;margin:28px auto 0;padding-top:16px;border-top:1px solid #222826;font-size:13px;color:#8A9692;text-align:center}
+</style>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="home" href="./traffic-landing.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg><span data-t="home">الرئيسية</span></a>
+    <h1 data-t="h1">الشروط والأحكام</h1>
+    <button class="lang" id="langBtn">English</button>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <h2 data-t="heroH">الشروط والأحكام</h2>
+    <p data-t="heroP">باستخدامك لهذا الموقع فإنك توافق على الشروط والأحكام التالية. يُرجى قراءتها بعناية قبل استخدام الخدمة.</p>
+    <span class="updated" data-t="upd">آخر تحديث: ٢٦ مايو ٢٠٢٦</span>
+  </div>
+  <article id="article"></article>
+</main>
+
+<footer>
+  <div class="ft">
+    <div><h4 data-t="f4">بيانات الشركة</h4><ul><li><span dir="ltr">TOV "КОНСТРУКТИВ ВТВ"</span></li><li><span dir="ltr">вулиця Тарасівська, будинок 23/25</span></li><li><span dir="ltr">Київ, 01033</span></li><li data-t="f4c">أوكرانيا</li><li style="margin-top:6px"><span data-t="f4d">الدومين</span> <span dir="ltr">abircarservices.online</span> <span data-t="f4e">مملوك للشركة</span></li></ul></div>
+    <div><h4 data-t="legal">الصفحات القانونية</h4><ul>
+      <li><a href="./privacy.html" data-t="lp1">سياسة الخصوصية</a></li>
+      <li><a href="./terms.html" data-t="lp2">الشروط والأحكام</a></li>
+      <li><a href="./disclaimer.html" data-t="lp3">إخلاء المسؤولية</a></li>
+      <li><a href="./cookies.html" data-t="lp4">سياسة ملفات تعريف الارتباط</a></li>
+    </ul></div>
+    <div><h4 data-t="f3">تواصل معنا</h4><ul><li><span data-t="f3a">الهاتف:</span> <span dir="ltr">800 000 000</span></li><li><span data-t="f3b">البريد:</span> <span dir="ltr">support@abircarservices.online</span></li><li data-t="f3c">ساعات العمل: ٨ ص – ٨ م</li></ul></div>
+  </div>
+  <div class="copy" data-t="copy">© 2026 TOV "КОНСТРУКТИВ ВТВ" — جميع الحقوق محفوظة</div>
+</footer>
+
+<script>
+const UI={
+ar:{home:"الرئيسية",lang:"English",upd:"آخر تحديث: ٢٦ مايو ٢٠٢٦",
+f4:"بيانات الشركة",f4c:"أوكرانيا",f4d:"الدومين",f4e:"مملوك للشركة",
+legal:"الصفحات القانونية",lp1:"سياسة الخصوصية",lp2:"الشروط والأحكام",lp3:"إخلاء المسؤولية",lp4:"سياسة ملفات تعريف الارتباط",
+f3:"تواصل معنا",f3a:"الهاتف:",f3b:"البريد:",f3c:"ساعات العمل: ٨ ص – ٨ م",
+copy:'© 2026 TOV "КОНСТРУКТИВ ВТВ" — جميع الحقوق محفوظة',
+h1:"الشروط والأحكام",heroH:"الشروط والأحكام",heroP:"باستخدامك لهذا الموقع فإنك توافق على الشروط والأحكام التالية. يُرجى قراءتها بعناية قبل استخدام الخدمة."},
+en:{home:"Home",lang:"العربية",upd:"Last updated: 26 May 2026",
+f4:"Company details",f4c:"Ukraine",f4d:"Domain",f4e:"owned by the company",
+legal:"Legal pages",lp1:"Privacy Policy",lp2:"Terms & Conditions",lp3:"Disclaimer",lp4:"Cookie Policy",
+f3:"Contact us",f3a:"Phone:",f3b:"Email:",f3c:"Hours: 8 AM – 8 PM",
+copy:'© 2026 TOV "КОНСТРУКТИВ ВТВ" — All rights reserved',
+h1:"Terms & Conditions",heroH:"Terms & Conditions",heroP:"By using this site you agree to the following terms and conditions. Please read them carefully before using the service."}};
+
+const SECTIONS={"ar": [["قبول الشروط", [["p", "يُعدّ استخدامك للموقع موافقة صريحة على هذه الشروط. إذا كنت لا توافق عليها، يُرجى عدم استخدام الخدمة."]]], ["طبيعة الخدمة", [["p", "يوفّر الموقع خدمة الاستعلام عن المخالفات المرورية ومتابعة حالتها لأغراض معلوماتية. ولا يُعدّ الموقع جهة رسمية لإصدار المخالفات أو تحصيلها ما لم يُذكر خلاف ذلك."]]], ["التزامات المستخدم", [["p", "يلتزم المستخدم بما يلي:"], ["ul", ["إدخال بيانات صحيحة وكاملة عند الاستعلام.", "استخدام الخدمة لأغراض مشروعة فقط.", "عدم محاولة اختراق الموقع أو تعطيله أو الوصول غير المصرّح به إلى بياناته."]]]], ["دقة المعلومات", [["p", "نسعى لعرض معلومات دقيقة ومحدّثة، لكننا لا نضمن خلوّها من الأخطاء في جميع الأوقات. تبقى البيانات الرسمية الصادرة عن الجهة المختصة هي المرجع المعتمد."]]], ["الملكية الفكرية", [["p", "جميع محتويات الموقع من نصوص وشعارات وتصاميم مملوكة للشركة، ولا يجوز نسخها أو إعادة نشرها دون إذن كتابي مسبق."]]], ["تعليق الخدمة", [["p", "يحق لنا تعديل الخدمة أو تعليقها أو إيقافها كلياً أو جزئياً في أي وقت دون إشعار مسبق، خاصة لأغراض الصيانة أو الأمان."]]], ["تعديل الشروط", [["p", "قد نحدّث هذه الشروط من وقت لآخر، ويسري التعديل فور نشره على هذه الصفحة. استمرارك في الاستخدام يعني قبولك للنسخة المحدّثة."]]], ["القانون الواجب التطبيق", [["p", "تخضع هذه الشروط للقوانين المعمول بها، وتُحلّ أي نزاعات وفقاً للجهات القضائية المختصة."]]]], "en": [["Acceptance of terms", [["p", "Using the site is explicit acceptance of these terms. If you do not agree, please do not use the service."]]], ["Nature of the service", [["p", "The site provides a traffic-violations inquiry and status-tracking service for information purposes. It is not an official authority for issuing or collecting fines unless stated otherwise."]]], ["User obligations", [["p", "The user agrees to:"], ["ul", ["Enter correct and complete data when making an inquiry.", "Use the service for lawful purposes only.", "Not attempt to breach, disrupt, or gain unauthorised access to the site or its data."]]]], ["Accuracy of information", [["p", "We aim to show accurate, up-to-date information but cannot guarantee it is error-free at all times. The official data issued by the competent authority remains the authoritative reference."]]], ["Intellectual property", [["p", "All site content — text, logos and designs — is owned by the company and may not be copied or republished without prior written permission."]]], ["Service suspension", [["p", "We may modify, suspend or discontinue the service in whole or in part at any time without prior notice, particularly for maintenance or security."]]], ["Changes to terms", [["p", "We may update these terms from time to time; changes take effect once published on this page. Continued use means you accept the updated version."]]], ["Governing law", [["p", "These terms are governed by applicable law, and any disputes are resolved before the competent courts."]]]]};
+
+let lang="ar";
+try{lang=localStorage.getItem("lang")||"ar"}catch(e){}
+const $=s=>document.querySelector(s);
+
+function renderArticle(){
+  $("#article").innerHTML=SECTIONS[lang].map((s,i)=>{
+    const body=s[1].map(x=>x[0]==="ul"?`<ul>${x[1].map(li=>`<li>${li}</li>`).join("")}</ul>`:`<p>${x[1]}</p>`).join("");
+    return `<section class="sec"><h3><span class="n">${i+1}</span>${s[0]}</h3>${body}</section>`;
+  }).join("");
+}
+function applyLang(){
+  const t=UI[lang];
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  document.querySelectorAll("[data-t]").forEach(el=>{if(t[el.dataset.t]!==undefined)el.textContent=t[el.dataset.t]});
+  $("#langBtn").textContent=t.lang;
+  document.title=t.h1;
+  renderArticle();
+  try{localStorage.setItem("lang",lang)}catch(e){}
+}
+$("#langBtn").onclick=()=>{lang=lang==="ar"?"en":"ar";applyLang()};
+applyLang();
+</script>

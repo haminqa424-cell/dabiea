@@ -1,0 +1,250 @@
+<title>الاستعلام عن المخالفات المرورية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+/* Layout: white app-bar, banner carousel, stacked action buttons, FAQ accordion, black footer */
+:root{
+  --mint:#2FB38A; --mint-dark:#1F8F6C; --mint-soft:#E6F6F0;
+  --ink:#16201C; --muted:#5B6B65; --line:#E3EBE8;
+  --bg:#F6F9F8; --card:#FFFFFF; --footer:#0B0D0C; --footer-fg:#C9D3CF;
+  --display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --body:"IBM Plex Sans Arabic","Readex Pro",system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--mint);outline-offset:2px}
+
+/* Header */
+.hdr{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 2px 10px rgba(22,32,28,.05)}
+.hdr-in{max-width:1100px;margin:0 auto;padding:10px 16px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px}
+.burger{width:44px;height:44px;border:0;background:transparent;display:grid;place-content:center;gap:5px;border-radius:10px}
+.burger span{display:block;width:24px;height:3px;border-radius:3px;background:var(--mint)}
+.burger:hover{background:var(--mint-soft)}
+.hdr h1{margin:0;text-align:center;font-family:var(--display);font-weight:600;font-size:clamp(15px,3.6vw,20px);color:var(--ink);text-wrap:balance}
+.lang{background:var(--mint);color:#fff;border:0;border-radius:999px;padding:8px 16px;font-weight:600;font-size:14px;min-width:84px}
+.lang:hover{background:var(--mint-dark)}
+
+/* Drawer */
+.drawer{position:fixed;inset:0;z-index:40;background:rgba(11,13,12,.45)}
+.drawer nav{position:absolute;top:0;bottom:0;inset-inline-start:0;width:min(300px,82vw);background:#fff;padding:calc(env(safe-area-inset-top,0px) + 20px) 20px 20px;display:flex;flex-direction:column;gap:4px}
+.drawer a{color:var(--ink);text-decoration:none;padding:12px 10px;border-radius:10px;font-weight:500}
+.drawer a:hover{background:var(--mint-soft);color:var(--mint-dark)}
+.drawer .close{align-self:flex-end;border:0;background:var(--mint-soft);color:var(--mint-dark);border-radius:10px;padding:6px 12px;margin-bottom:8px}
+
+main{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:20px 48px;display:flex;flex-direction:column;gap:28px}
+
+/* Banner */
+.banner{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:1600/1242;max-width:100%;background:#E9EEEC}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;display:block;object-fit:cover}
+.slide .cap{position:absolute;inset-inline-start:6%;top:50%;transform:translateY(-50%);max-width:58%;color:#fff}
+.slide .cap b{display:block;font-family:var(--display);font-size:clamp(16px,4.2vw,30px);line-height:1.3;text-wrap:balance}
+.slide .cap small{display:block;font-size:clamp(11px,2.4vw,15px);opacity:.9;margin-top:6px}
+.dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px}
+.dots button{width:8px;height:8px;border-radius:99px;border:0;background:rgba(22,32,28,.35);padding:0;transition:width .3s}
+.dots button.on{width:22px;background:var(--mint)}
+
+/* Actions */
+.actions{display:flex;flex-direction:column;gap:14px}
+.act{position:relative;overflow:hidden;display:flex;align-items:center;gap:16px;width:100%;min-height:72px;border:0;border-radius:16px;
+  background:linear-gradient(135deg,var(--mint) 0%,var(--mint-dark) 100%);color:#fff;padding:12px 14px 12px 18px;text-align:start;
+  box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 8px 20px rgba(31,143,108,.28);transition:transform .18s ease,box-shadow .18s ease}
+[dir="rtl"] .act{padding:12px 18px 12px 14px}
+.act::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);transform:translateX(-120%);transition:transform .6s ease}
+.act:hover{transform:translateY(-2px);box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 12px 26px rgba(31,143,108,.36)}
+.act:hover::after{transform:translateX(120%)}
+.act:active{transform:translateY(0) scale(.99)}
+.act .ic{flex:none;width:50px;height:50px;border-radius:14px;background:#fff;display:grid;place-items:center;box-shadow:0 4px 10px rgba(0,0,0,.08)}
+.act .ic svg{width:28px;height:28px}
+.act .ic svg [stroke="#fff"],.act .ic svg{stroke:var(--mint-dark)}
+.act .ic svg circle[fill]{fill:var(--mint-soft)}
+.act .tx{flex:1;min-width:0}
+.act .tx b{display:block;font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:.2px}
+.act .arr{flex:none;width:34px;height:34px;padding:7px;border-radius:50%;background:rgba(255,255,255,.18);transition:transform .2s}
+.act:hover .arr{transform:translateX(-4px)}
+[dir="ltr"] .act .arr{transform:scaleX(-1)}
+[dir="ltr"] .act:hover .arr{transform:scaleX(-1) translateX(-4px)}
+
+/* FAQ */
+.sec-h{font-family:var(--display);font-size:22px;margin:0 0 4px}
+.sec-p{margin:0 0 14px;color:var(--muted)}
+.faq{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:last-child{border-bottom:0}
+.faq summary{list-style:none;display:flex;align-items:center;gap:12px;padding:16px;font-weight:600;cursor:pointer}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .n{flex:none;width:28px;height:28px;border-radius:8px;background:var(--mint-soft);color:var(--mint-dark);display:grid;place-items:center;font-size:13px;font-variant-numeric:tabular-nums}
+.faq summary .q{flex:1;min-width:0}
+.faq summary .pm{flex:none;width:18px;height:18px;position:relative}
+.faq summary .pm::before,.faq summary .pm::after{content:"";position:absolute;inset:8px 2px auto;height:2px;background:var(--mint);border-radius:2px;transition:transform .2s}
+.faq summary .pm::after{transform:rotate(90deg)}
+.faq details[open] summary .pm::after{transform:rotate(0)}
+.faq details p{margin:0;padding:0 16px 16px 56px;color:var(--muted)}
+[dir="rtl"] .faq details p{padding:0 56px 16px 16px}
+
+/* Footer */
+footer{background:var(--footer);color:var(--footer-fg);padding-inline:16px;padding-block:36px 24px}
+.ft{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px}
+.ft h4{margin:0 0 10px;color:#fff;font-family:var(--display);font-size:16px}
+.ft ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.ft a{color:var(--footer-fg);text-decoration:none}
+.ft a:hover{color:var(--mint)}
+.copy{max-width:1100px;margin:28px auto 0;padding-top:16px;border-top:1px solid #222826;font-size:13px;color:#8A9692;text-align:center}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <button class="burger" id="menuBtn" aria-label="القائمة"><span></span><span></span><span></span></button>
+    <h1 data-t="title">الاستعلام عن المخالفات المرورية</h1>
+    <button class="lang" id="langBtn">English</button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <nav>
+    <button class="close" id="closeMenu" data-t="close">إغلاق ✕</button>
+    <a href="#top" data-t="m1">الرئيسية</a>
+    <a href="#services" data-t="m2">خدمات الاستعلام</a>
+    <a href="#faq" data-t="m3">الأسئلة الشائعة</a>
+    <a href="#contact" data-t="m4">تواصل معنا</a>
+  </nav>
+</div>
+
+<main id="top">
+  <section class="banner" aria-label="banner">
+    <div class="slide on"><img src="img/banner1.jpg" alt="قد بحذر، قد بمسؤولية"></div>
+    <div class="slide"><img src="img/banner2.jpg" alt="السرعة تستحوذ على 80% من المخالفات المرورية"></div>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <section class="actions" id="services">
+    <button class="act" data-go="plate">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2.5"/><path d="M6 10h3M6 14h5M14 10h4v4h-4z"/></svg></span>
+      <span class="tx"><b data-t="b1">الاستعلام برقم اللوحة</b></span>
+      <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <button class="act" data-go="file">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="12.5" r="2"/><path d="M8.5 17c.6-1.5 2-2.3 3.5-2.3s2.9.8 3.5 2.3"/></svg></span>
+      <span class="tx"><b data-t="b2">الاستعلام بالملف المروري</b></span>
+      <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+    <button class="act" data-go="ticket">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 12h7M9 16h4"/><circle cx="17.5" cy="17.5" r="3" fill="#2FB38A"/><path d="M19.6 19.6 21.5 21.5"/></svg></span>
+      <span class="tx"><b data-t="b3">الاستعلام برقم المخالفة</b></span>
+      <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+  </section>
+
+  <section id="faq">
+    <h2 class="sec-h" data-t="faqH">الأسئلة الشائعة</h2>
+    <p class="sec-p" data-t="faqP">إجابات عن أكثر الأسئلة تكراراً حول المخالفات المرورية.</p>
+    <div class="faq" id="faqList"></div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="ft">
+    <div><h4 data-t="f1">عن الخدمة</h4><p style="margin:0" data-t="f1p">بوابة إلكترونية للاستعلام عن المخالفات المرورية ومتابعة حالتها بسهولة.</p></div>
+    <div><h4 data-t="f2">روابط سريعة</h4><ul><li><a href="#services" data-t="m2">خدمات الاستعلام</a></li><li><a href="#faq" data-t="m3">الأسئلة الشائعة</a></li><li><a href="#top" data-t="m1">الرئيسية</a></li></ul></div>
+    <div><h4 data-t="f4">بيانات الشركة</h4><ul><li><span dir="ltr">TOV "КОНСТРУКТИВ ВТВ"</span></li><li><span dir="ltr">вулиця Тарасівська, будинок 23/25</span></li><li><span dir="ltr">Київ, 01033</span></li><li data-t="f4c">أوكرانيا</li><li style="margin-top:6px"><span data-t="f4d">الدومين</span> <span dir="ltr">abircarservices.online</span> <span data-t="f4e">مملوك للشركة</span></li></ul></div>
+    <div><h4 data-t="f3">تواصل معنا</h4><ul><li><span data-t="f3a">الهاتف:</span> <span dir="ltr">800 000 000</span></li><li><span data-t="f3b">البريد:</span> <span dir="ltr">support@example.com</span></li><li data-t="f3c">ساعات العمل: ٨ ص – ٨ م</li></ul></div>
+  </div>
+  <div class="copy" data-t="copy">© 2026 جميع الحقوق محفوظة</div>
+</footer>
+
+
+<script>
+const T={
+ar:{title:"الاستعلام عن المخالفات المرورية",close:"إغلاق ✕",m1:"الرئيسية",m2:"خدمات الاستعلام",m3:"الأسئلة الشائعة",m4:"تواصل معنا",
+s1t:"استعلم عن مخالفاتك في ثوانٍ",s1s:"خدمة إلكترونية متاحة على مدار الساعة",s2t:"ادفع مخالفاتك بسهولة",s2s:"تابع حالة السداد من مكان واحد",s3t:"قيادة آمنة، طرق أكثر أماناً",s3s:"التزم بقواعد السير وتجنّب المخالفات",
+b1:"الاستعلام برقم اللوحة",b1s:"أدخل رقم لوحة المركبة ورمزها",b2:"الاستعلام بالملف المروري",b2s:"برقم الملف أو رقم الهوية",b3:"الاستعلام برقم المخالفة",b3s:"أدخل الرقم المدوّن على إشعار المخالفة",
+faqH:"الأسئلة الشائعة",faqP:"إجابات عن أكثر الأسئلة تكراراً حول المخالفات المرورية.",
+f1:"عن الخدمة",f1p:"بوابة إلكترونية للاستعلام عن المخالفات المرورية ومتابعة حالتها بسهولة.",f2:"روابط سريعة",f3:"تواصل معنا",f4:"بيانات الشركة",f4c:"أوكرانيا",f4d:"الدومين",f4e:"مملوك للشركة",f3a:"الهاتف:",f3b:"البريد:",f3c:"ساعات العمل: ٨ ص – ٨ م",copy:'© 2026 TOV "КОНСТРУКТИВ ВТВ" — جميع الحقوق محفوظة',
+search:"استعلام",cancel:"إلغاء",lang:"English",
+plate:"رقم اللوحة",code:"رمز اللوحة",source:"جهة الإصدار",fileNo:"رقم الملف المروري أو الهوية",ticketNo:"رقم المخالفة",
+note:"تم استلام طلبك. ستُربط هذه الصفحة بخدمة الاستعلام لعرض النتائج.",req:"يرجى تعبئة جميع الحقول.",
+sources:["أبوظبي","دبي","الشارقة","عجمان","أم القيوين","رأس الخيمة","الفجيرة"]},
+en:{title:"Traffic Violations Inquiry",close:"Close ✕",m1:"Home",m2:"Inquiry services",m3:"FAQ",m4:"Contact us",
+s1t:"Check your fines in seconds",s1s:"An online service available 24/7",s2t:"Pay your fines with ease",s2s:"Track payment status in one place",s3t:"Drive safe, safer roads",s3s:"Follow the rules and avoid violations",
+b1:"Inquiry by plate number",b1s:"Enter the vehicle plate number and code",b2:"Inquiry by traffic file",b2s:"By file number or ID number",b3:"Inquiry by fine number",b3s:"Enter the number printed on the fine notice",
+faqH:"Frequently asked questions",faqP:"Answers to the most common questions about traffic violations.",
+f1:"About the service",f1p:"An online portal to look up traffic violations and follow their status.",f2:"Quick links",f3:"Contact us",f4:"Company details",f4c:"Ukraine",f4d:"Domain",f4e:"owned by the company",f3a:"Phone:",f3b:"Email:",f3c:"Hours: 8 AM – 8 PM",copy:'© 2026 TOV "КОНСТРУКТИВ ВТВ" — All rights reserved',
+search:"Search",cancel:"Cancel",lang:"العربية",
+plate:"Plate number",code:"Plate code",source:"Issuing emirate",fileNo:"Traffic file or ID number",ticketNo:"Fine number",
+note:"Request received. This page will be connected to the inquiry service to show results.",req:"Please fill in all fields.",
+sources:["Abu Dhabi","Dubai","Sharjah","Ajman","Umm Al Quwain","Ras Al Khaimah","Fujairah"]}};
+
+const FAQ={ar:[
+["كيف أستعلم عن المخالفات المرورية؟","اختر طريقة الاستعلام المناسبة: برقم اللوحة أو بالملف المروري أو برقم المخالفة، ثم أدخل البيانات المطلوبة واضغط استعلام."],
+["هل خدمة الاستعلام مجانية؟","نعم، الاستعلام عن المخالفات مجاني بالكامل ولا يتطلب أي رسوم."],
+["ما البيانات المطلوبة للاستعلام برقم اللوحة؟","رقم اللوحة، ورمز اللوحة، وجهة الإصدار."],
+["ما هو الملف المروري؟","هو سجل يجمع بيانات السائق ومركباته ورخصه والمخالفات المسجلة عليه."],
+["أين أجد رقم المخالفة؟","يظهر رقم المخالفة في إشعار المخالفة الورقي أو في الرسالة النصية التي تصلك عند تسجيلها."],
+["كم يستغرق ظهور المخالفة في النظام؟","تظهر أغلب المخالفات خلال 24 إلى 48 ساعة من تسجيلها."],
+["هل يمكنني الاعتراض على مخالفة؟","نعم، يمكنك تقديم اعتراض خلال المدة المحددة مع إرفاق ما يثبت موقفك."],
+["كم مدة دراسة الاعتراض؟","تُدرس الاعتراضات عادة خلال 5 إلى 10 أيام عمل، ويصلك إشعار بالنتيجة."],
+["هل توجد خصومات على المخالفات؟","تتوفر خصومات في بعض الحالات عند السداد المبكر، وتختلف حسب جهة الإصدار."],
+["ما طرق سداد المخالفات؟","يمكن السداد إلكترونياً بالبطاقات البنكية، أو عبر أجهزة الدفع الذاتي، أو في مراكز الخدمة."],
+["هل يمكن تقسيط المخالفات؟","تتيح بعض الجهات تقسيط المخالفات عبر البنوك المشاركة وفق شروط محددة."],
+["ماذا يحدث إذا لم أسدد المخالفة؟","قد يؤدي عدم السداد إلى تعذّر تجديد ترخيص المركبة أو فرض رسوم إضافية."],
+["ما هي النقاط السوداء؟","نقاط تُسجّل على رخصة السائق مع بعض المخالفات، وتراكمها قد يؤدي إلى إيقاف الرخصة."],
+["هل يمكنني الاستعلام عن مخالفات مركبة لا أملكها؟","يمكن الاستعلام برقم اللوحة لأي مركبة، أما تفاصيل الملف المروري فتقتصر على صاحبه."],
+["كيف أتواصل مع الدعم الفني؟","عبر رقم الهاتف أو البريد الإلكتروني الموضّحين في أسفل الصفحة خلال ساعات العمل."]],
+en:[
+["How do I check my traffic violations?","Choose an inquiry method: by plate number, traffic file, or fine number, then enter the details and tap Search."],
+["Is the inquiry service free?","Yes, checking violations is completely free."],
+["What do I need to search by plate number?","The plate number, the plate code, and the issuing emirate."],
+["What is a traffic file?","A record that holds the driver's details, vehicles, licences and any registered violations."],
+["Where do I find the fine number?","It is printed on the paper fine notice or included in the text message you receive when the fine is issued."],
+["How long until a fine appears in the system?","Most fines appear within 24 to 48 hours of being issued."],
+["Can I dispute a fine?","Yes, you can file an objection within the set period and attach supporting evidence."],
+["How long does a dispute review take?","Objections are usually reviewed within 5 to 10 working days, and you are notified of the result."],
+["Are there discounts on fines?","Early-payment discounts are available in some cases and vary by issuing authority."],
+["How can I pay my fines?","Pay online by bank card, at self-service kiosks, or at service centres."],
+["Can I pay fines in instalments?","Some authorities allow instalments through participating banks under set conditions."],
+["What happens if I don't pay?","Unpaid fines can block vehicle registration renewal or add extra charges."],
+["What are black points?","Points added to a driver's licence with certain violations; too many can lead to suspension."],
+["Can I check fines for a car I don't own?","You can search any vehicle by plate number; traffic file details are limited to the file owner."],
+["How do I reach support?","Use the phone number or email at the bottom of the page during working hours."]]};
+
+let lang="ar";
+try{lang=localStorage.getItem("lang")||"ar"}catch(e){}
+const $=s=>document.querySelector(s);
+
+function renderFaq(){
+  $("#faqList").innerHTML=FAQ[lang].map((f,i)=>`<details><summary><span class="n">${i+1}</span><span class="q">${f[0]}</span><span class="pm"></span></summary><p>${f[1]}</p></details>`).join("");
+}
+function applyLang(){
+  const t=T[lang];
+  document.documentElement.lang=lang;
+  document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+  document.querySelectorAll("[data-t]").forEach(el=>{if(t[el.dataset.t])el.textContent=t[el.dataset.t]});
+  $("#langBtn").textContent=t.lang;
+  document.title=t.title;
+  renderFaq();
+  try{localStorage.setItem("lang",lang)}catch(e){}
+}
+$("#langBtn").onclick=()=>{lang=lang==="ar"?"en":"ar";applyLang()};
+
+/* Drawer */
+$("#menuBtn").onclick=()=>{$("#drawer").hidden=false};
+$("#closeMenu").onclick=()=>{$("#drawer").hidden=true};
+$("#drawer").onclick=e=>{if(e.target.id==="drawer"||e.target.tagName==="A")$("#drawer").hidden=true};
+
+/* Banner */
+const slides=[...document.querySelectorAll(".slide")];let cur=0,timer;
+$("#dots").innerHTML=slides.map((_,i)=>`<button aria-label="${i+1}" class="${i?"":"on"}"></button>`).join("");
+const dots=[...document.querySelectorAll("#dots button")];
+function go(i){slides[cur].classList.remove("on");dots[cur].classList.remove("on");cur=i;slides[cur].classList.add("on");dots[cur].classList.add("on")}
+function auto(){clearInterval(timer);timer=setInterval(()=>go((cur+1)%slides.length),4500)}
+dots.forEach((d,i)=>d.onclick=()=>{go(i);auto()});auto();
+
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){$("#drawer").hidden=true}});
+
+applyLang();
+</script>
